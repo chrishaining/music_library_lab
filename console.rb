@@ -2,6 +2,7 @@ require('pry')
 require_relative('./models/artist')
 require_relative('./models/album')
 
+#The other of deletion is important. The album has to go first.
 Album.delete_all()
 Artist.delete_all()
 

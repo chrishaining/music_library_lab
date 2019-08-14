@@ -68,13 +68,13 @@ def update()
     return updated_album
   end
 
-#I DO NOT KNOW HOW TO DELETE WHEN ONE TABLE IS DEPENDENT ON ANOTHER TABLE
-#Methods to delete records. the DELETE part of CRUD.
+# the DELETE part of CRUD. 
 def Album.delete_all
   sql = "DELETE FROM albums"
   SqlRunner.run(sql)
 end
 
+#Tricky - this works, as long as the artist does not have multiple albums.
 def delete
   sql = "DELETE FROM albums WHERE id = $1"
   values = [@id]

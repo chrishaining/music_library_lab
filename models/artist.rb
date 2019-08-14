@@ -46,21 +46,6 @@ class Artist
     return all_their_albums
   end
 
-  #I DO NOT KNOW HOW TO DELETE WHEN ONE TABLE IS DEPENDENT ON ANOTHER TABLE
-  #Methods to delete records. the DELETE part of CRUD.
-  # def Artist.delete_all
-  #   sql = "DELETE FROM artists"
-  #   result = SqlRunner.run(sql)
-  #   sql = "DELETE FROM artists"
-  # end
-
-  # def delete
-  #   sql = "DELETE FROM artists WHERE id = $1"
-  #   values = [@id]
-  #   SqlRunner.run(sql, values)
-  # end
-
-
   #Updates a record. The UPDATE part of CRUD. NOT WORKING - error message is /Users/user/codeclan_work/week_03/day_3/music_library_lab/models/artist.rb:62:in `async_prepare': ERROR:  source for a multiple-column UPDATE item must be a sub-SELECT or ROW() expression (PG::FeatureNotSupported)
   # LINE 4:     ($1)
   def update
