@@ -1,9 +1,9 @@
-require('pry-byebug')
+require('pry')
 require_relative('./models/artist')
 require_relative('./models/album')
 
-# Artist.delete_all()
-# Album.delete_all()
+Album.delete_all()
+Artist.delete_all()
 
 artist1 = Artist.new( { 'name' => 'Jim Morrison'} )
 artist2 = Artist.new( { 'name' => 'David Bowie'} )
@@ -31,8 +31,11 @@ album4.save()
 album5.save()
 album6.save()
 
-# artist1.name = 'Alice Cooper'
-# artist1.update
+artist1.name = 'Alice Cooper'
+artist1.update
+
+album1.title = "pappaap"
+album1.update()
 
 binding.pry
 nil

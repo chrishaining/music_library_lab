@@ -46,8 +46,8 @@ class Artist
     return all_their_albums
   end
 
-#I DO NOT KNOW HOW TO DELETE WHEN ONE TABLE IS DEPENDENT ON ANOTHER TABLE
-#Methods to delete records. the DELETE part of CRUD.
+  #I DO NOT KNOW HOW TO DELETE WHEN ONE TABLE IS DEPENDENT ON ANOTHER TABLE
+  #Methods to delete records. the DELETE part of CRUD.
   # def Artist.delete_all
   #   sql = "DELETE FROM artists"
   #   result = SqlRunner.run(sql)
@@ -62,35 +62,60 @@ class Artist
 
 
   #Updates a record. The UPDATE part of CRUD. NOT WORKING - error message is /Users/user/codeclan_work/week_03/day_3/music_library_lab/models/artist.rb:62:in `async_prepare': ERROR:  source for a multiple-column UPDATE item must be a sub-SELECT or ROW() expression (PG::FeatureNotSupported)
-# LINE 4:     ($1)
-  # def update
-  #   sql = "
-  #   UPDATE artists
-  #   SET (name) =
-  #   ($1)
-  #   WHERE id = $2
-  #   "
-  #   # values = [@id, @name]
-  #   values = [@name, @id]
-  #   result = SqlRunner.run(sql, values)
-  #   updated_artist = Artist.new(result[0])
-  #   return updated_artist
-  # end
+  # LINE 4:     ($1)
+  def update
+    sql = "
+    UPDATE artists
+    SET name =
+    ($1)
+    WHERE id = $2
+    RETURNING *
+    "
+    # values = [@id, @name]
+    values = [@name, @id]
+    result = SqlRunner.run(sql, values)
+    updated_artist = Artist.new(result[0])
+    return updated_artist
+  end
+
+  #updates file. the UPDATE of CRUD.
+  def update()
+    sql = "UPDATE artists
+    SET
+    name
+    =
+    (
+      $1
+    )
+    WHERE id = $2
+    RETURNING * "
+    values = [@name, @id]
+    result = SqlRunner.run(sql, values)
+    updated_artist = Artist.new(result[0])
+    return updated_artist
+  end
 
   #Finds an artist by id.  The READ part of CRUD. TO REFACTOR USING SqlRunner
   def Artist.find(id)
-    db = PG.connect({dbname: 'music_library', host: 'localhost'})
     sql = "SELECT * FROM artists WHERE id = $1"
     values = [id]
-    db.prepare("find", sql)
-    results_array = db.exec_prepared("find", values)
-    db.close()
+    results_array = SqlRunner.run(sql, values)
     return nil if results_array.first() == nil
     artist_hash = results_array[0]
     found_artist = Artist.new(artist_hash)
     return found_artist
   end
 
+  def Artist.delete_all
+    sql = "DELETE FROM artists"
+    SqlRunner.run(sql)
+  end
+
+  def delete
+    sql = "DELETE FROM artists WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
 
   #FINAL END
 end
