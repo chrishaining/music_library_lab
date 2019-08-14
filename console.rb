@@ -19,12 +19,14 @@ album2 = Album.new( {'title' => 'Ziggy', 'genre' => 'Rock', 'artist_id' => artis
 album3=Album.new( {'title' => 'The Jimi Hendrix Experience', 'genre' => 'Guitar', 'artist_id' => artist3.id})
 album4=Album.new( {'title' => 'Big Yellow Taxi', 'genre' => 'Folk', 'artist_id' => artist4.id})
 album5=Album.new( {'title' => 'Greatest Hits', 'genre' => 'Rock n roll', 'artist_id' => artist5.id})
+album6=Album.new( {'title' => 'Poems 2', 'genre' => 'Rock n roll', 'artist_id' => artist1.id})
 
 album1.save()
 album2.save()
 album3.save()
 album4.save()
 album5.save()
+album6.save()
 
 binding.pry
 nil
